@@ -1,12 +1,30 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sidebar Content
+✅ Logo – At the top to show app branding.
+✅ Navigation Links – Links for easy navigation:
+    📋 Dashboard (Shows all tasks)
+    ➕ Add Task (Page to create a new task)
+    🔄 My Tasks (Shows user-specific tasks)
+    ⚙️ Settings/Profile (User settings & profile)
+    ✅ Logout Button – At the bottom to sign out.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✅ Row 1 → Overview Cards
 
-## Expanding the ESLint configuration
+Shows Pending, In Progress, Completed Tasks
+Each card links to the detailed All Tasks page
+✅ Row 2 → Recent Activities + Task Progress
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Scrollable list of recent actions (task updates, status changes, etc.)
+Progress bars for task completion trends
+✅ Row 3 → Quick Actions & Shortcuts
+
+"Add Task" Button (Opens a form to create a new task)
+"View All Tasks" Button (Navigates to the full task list)
+✅ Row 4 → Task List (Compact View)
+
+Shows 5-10 most recent tasks
+Allows search, filter, and sorting
+✅ (Optional) Row 5 → Calendar View & Upcoming Tasks
+
+A calendar layout to display deadlines and upcoming tasks
