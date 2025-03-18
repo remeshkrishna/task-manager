@@ -104,8 +104,12 @@ const Login=()=>{
                     }
                 })
                 const response = await data.json()
-                if(!response.ok){
+                if(!response.id){
                     setMessage(response.detail.message)
+                }
+                else{
+                    setMessage("User registered successfully. Please login")
+                    restForm()
                 }
             }
             else{
@@ -127,7 +131,7 @@ const Login=()=>{
                         <button onClick={handleSigninSignup} className="w-[50%] p-4 rounded-2xl bg-blue-400 text-white overflow-hidden hover:cursor-pointer">{formType==="signup"?"Sign Up":"Sign In"}</button>
                         {formType==="signup" && <button className="w-[50%] p-4 rounded-2xl bg-blue-400 text-white overflow-hidden hover:cursor-pointer">Use Code</button>}
                     </div>
-                    <span className="text-red-600">{message}</span>
+                    <span className={message==="User registered successfully. Please login"?"text-green-700":"text-red-600"}>{message}</span>
                     <button  onClick={toggleForm} className="w-[80%] p-4 rounded-2xl text-black hover:cursor-pointer">{formType==="signup"?"Existing User? Login here":"New User? Sign Up"}</button>
                     
                 </div>
