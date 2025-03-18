@@ -1,30 +1,58 @@
 
-Sidebar Content
-✅ Logo – At the top to show app branding.
-✅ Navigation Links – Links for easy navigation:
-    📋 Dashboard (Shows all tasks)
-    ➕ Add Task (Page to create a new task)
-    🔄 My Tasks (Shows user-specific tasks)
-    ⚙️ Settings/Profile (User settings & profile)
-    ✅ Logout Button – At the bottom to sign out.
+Frontend (React + Redux)
 
 
-✅ Row 1 → Overview Cards
+Authentication
+============================================
+Login & Signup pages
+JWT-based authentication
 
-Shows Pending, In Progress, Completed Tasks
-Each card links to the detailed All Tasks page
-✅ Row 2 → Recent Activities + Task Progress
 
-Scrollable list of recent actions (task updates, status changes, etc.)
-Progress bars for task completion trends
-✅ Row 3 → Quick Actions & Shortcuts
+Dashboard
+=====================================================
+Overview Cards: Pending, In Progress, Completed tasks
+Recent Activities: Scrollable list of recent actions
+Task Progress: Category-wise progress bars
+Quick Actions: Add Task, View All Tasks buttons
+Task List (Compact View): Search, filter, sort tasks
+Calendar View (Optional): Upcoming task deadlines
 
-"Add Task" Button (Opens a form to create a new task)
-"View All Tasks" Button (Navigates to the full task list)
-✅ Row 4 → Task List (Compact View)
+Task Management
+===========================================================
+Add Task Page: Form for task creation
+All Tasks Page: View, edit, delete tasks
+Task Details Page: Full details with comments & activity log
+Backend (FastAPI + PostgreSQL)
 
-Shows 5-10 most recent tasks
-Allows search, filter, and sorting
-✅ (Optional) Row 5 → Calendar View & Upcoming Tasks
 
-A calendar layout to display deadlines and upcoming tasks
+User Authentication
+================================================================
+User registration & login
+Secure password hashing
+JWT authentication
+
+
+Task Management
+===================================================================
+Create, Read, Update, Delete (CRUD) tasks
+Store task title, description, status, priority, due date
+Track task creation & modification timestamps
+Store task assignments (user association)
+
+Activity Logging
+====================================================================
+Log task changes (status updates, comments)
+Fetch recent activities for the dashboard
+
+Database (PostgreSQL)
+============================================================
+Tables for Users, Tasks, and Activities
+Efficient indexing for performance
+
+API Endpoints
+===========================================
+/signup → Register user
+/token → Authenticate user
+/tasks → CRUD operations
+/users → user operations
+Middleware for CORS & security
