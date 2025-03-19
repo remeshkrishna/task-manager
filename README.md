@@ -1,5 +1,6 @@
 
 Frontend (React + Redux)
+Backend (Python FastAPI) -> https://github.com/remeshkrishna/task-manager-backend
 
 
 Authentication
