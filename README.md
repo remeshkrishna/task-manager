@@ -1,59 +1,72 @@
+# Task Manager App
 
-Frontend (React + Redux)\n
-Backend (Python FastAPI) -> https://github.com/remeshkrishna/task-manager-backend
+## Tech Stack
+- **Frontend:** React + Redux  
+- **Backend:** Python FastAPI → [GitHub Repo](https://github.com/remeshkrishna/task-manager-backend)
 
+---
 
-Authentication
-============================================
-Login & Signup pages
-JWT-based authentication
+## Authentication
+### Login & Signup Pages
+- JWT-based authentication
 
+---
 
-Dashboard
-=====================================================
-Overview Cards: Pending, In Progress, Completed tasks
-Recent Activities: Scrollable list of recent actions
-Task Progress: Category-wise progress bars
-Quick Actions: Add Task, View All Tasks buttons
-Task List (Compact View): Search, filter, sort tasks
-Calendar View (Optional): Upcoming task deadlines
+## Dashboard
+- **Overview Cards:** Pending, In Progress, Completed tasks  
+- **Recent Activities:** Scrollable list of recent actions  
+- **Task Progress:** Category-wise progress bars  
+- **Quick Actions:** Add Task, View All Tasks buttons  
+- **Task List (Compact View):** Search, filter, sort tasks  
+- **Calendar View (Optional):** Upcoming task deadlines  
 
-Task Management
-===========================================================
-Add Task Page: Form for task creation
-All Tasks Page: View, edit, delete tasks
-Task Details Page: Full details with comments & activity log
-Backend (FastAPI + PostgreSQL)
+---
 
+## Task Management
+### Add Task Page
+- Form for task creation  
 
-User Authentication
-================================================================
-User registration & login
-Secure password hashing
-JWT authentication
+### All Tasks Page
+- View, edit, delete tasks  
 
+### Task Details Page
+- Full details with comments & activity log  
 
-Task Management
-===================================================================
-Create, Read, Update, Delete (CRUD) tasks
-Store task title, description, status, priority, due date
-Track task creation & modification timestamps
-Store task assignments (user association)
+### Backend
+- FastAPI + PostgreSQL  
 
-Activity Logging
-====================================================================
-Log task changes (status updates, comments)
-Fetch recent activities for the dashboard
+---
 
-Database (PostgreSQL)
-============================================================
-Tables for Users, Tasks, and Activities
-Efficient indexing for performance
+## User Authentication
+- User registration & login  
+- Secure password hashing  
+- JWT authentication  
 
-API Endpoints
-===========================================
-/signup → Register user
-/token → Authenticate user
-/tasks → CRUD operations
-/users → user operations
-Middleware for CORS & security
+---
+
+## Task Management
+- **CRUD Operations:** Create, Read, Update, Delete tasks  
+- **Task Details:** Title, description, status, priority, due date  
+- **Timestamps:** Track task creation & modification  
+- **Task Assignments:** Store user-task associations  
+
+---
+
+## Activity Logging
+- Log task changes (status updates, comments)  
+- Fetch recent activities for the dashboard  
+
+---
+
+## Database (PostgreSQL)
+- Tables for Users, Tasks, and Activities  
+- Efficient indexing for performance  
+
+---
+
+## API Endpoints
+- `/signup` → Register user  
+- `/token` → Authenticate user  
+- `/tasks` → CRUD operations  
+- `/users` → User operations  
+- **Middleware:** CORS & security  
