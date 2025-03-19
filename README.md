@@ -1,5 +1,5 @@
 
-Frontend (React + Redux)
+Frontend (React + Redux)\n
 Backend (Python FastAPI) -> https://github.com/remeshkrishna/task-manager-backend
 
 
