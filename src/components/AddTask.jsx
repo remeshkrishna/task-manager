@@ -1,8 +1,25 @@
 import { useRef } from "react"
+import { useSelector } from "react-redux"
+import { addTaskList } from "../store/taskSlice"
+import { useDispatch } from "react-redux"
 
 const AddTask = ()=>{
-
+    const dispatch = useDispatch()
+    const user = useSelector((store)=>store.user.user)
     const [name,desc,dueDate,priority,status, assignTo] = [useRef(null),useRef(null),useRef(null),useRef(null),useRef(null),useRef(null)]
+    const token = useSelector((store)=>store.user.token)
+
+    const fetchTaskList = async (token)=>{
+        const data = await fetch('http://localhost:8000/tasks/mytasks',{
+            headers: {
+                'Authorization':'Bearer '+token
+            }
+        })
+        const dataJson = await data.json()
+        console.log(dataJson)
+        dispatch(addTaskList(dataJson))
+    }
+    
     const handleAddTask = async()=>{
         const data = await fetch('http://127.0.0.1:8000/tasks',{
             method: 'POST',
@@ -15,10 +32,12 @@ const AddTask = ()=>{
                 "due_date": dueDate.current.value,
                 "priority": priority.current.value,
                 "status": status.current.value,
-                "assigned_to": assignTo.current.value
+                "assigned_to": assignTo.current.value,
+                "user_id":user.id
               })
         })
         console.log(await data.json())
+        await fetchTaskList(token)
     }
     return(
         <div className="grid bg-black w-full h-screen p-4 place-items-center">

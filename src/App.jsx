@@ -6,6 +6,8 @@ import Login from './components/Login'
 import AddTask from './components/AddTask'
 import './index.css'
 import Dashboard from './components/Dashboard'
+import TaskList from './components/TaskList'
+import ResponsiveGrid from './components/ResponsiveGrid'
 
 
 function App() {
@@ -13,12 +15,13 @@ function App() {
   return (
 
         <Router>
-          <div className='flex'>
+          <div className='flex h-full'>
             <SideMenu/>
               <Routes>
                 <Route path="/" element={<MainScreen/>}/>
                 <Route path="/login" element={<Login/>} />
-                <Route path="/task" element={<AddTask/>} />
+                <Route path="/addtask" element={<AddTask/>} />
+                <Route path="/task" element={<TaskList/>} />
                 <Route path="/dashboard" element={<Dashboard/>} />
               </Routes>  
           </div>

@@ -1,15 +1,19 @@
 import { useState } from "react"
 import { useRef } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch} from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { setLoginState } from "../store/userSlice"
+import { setLoginState, setToken, setUser } from "../store/userSlice"
+import { addTaskList } from "../store/taskSlice"
+
 
 const Login=()=>{
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [formType, setFormType] = useState("signin")
     const [message, setMessage] = useState('')
     const [name, email, pass, confirmPass] = [useRef(null), useRef(null), useRef(null), useRef(null)]
-    const navigate = useNavigate()
+    
+    
 
     const restForm=()=>{
         if(name.current){
@@ -33,28 +37,15 @@ const Login=()=>{
         restForm()
     }
 
-
-    const validateForm=(email, pass,  name, confirmPass)=>{
-        if(name){
-            console.log("name:"+name)
-            const nameRegex=/^[A-Za-z\s]{3,50}$/
-            if(!nameRegex.test(name)) return "Name not valid"
-        }
-        const emailRegex=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-        if(!emailRegex.test(email)) return "Email not valid"
-
-        const passRegex=/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-        if(!passRegex.test(pass)) return "Password Not Valid"
-
-        if(confirmPass){
-            if(pass!==confirmPass) return "Password not matching"
-        }
-        
-
-        return ""
-
+    const getUser = async(token)=>{
+        const data = await fetch('http://127.0.0.1:8000/users/me',{
+            headers: {
+                'Authorization': 'Bearer '+token
+            }
+        })
+        const user = data.json()
+        return user
     }
-
     
     const getAccessToken = async(email,pass)=>{
         const formData = new FormData()
@@ -68,7 +59,37 @@ const Login=()=>{
         response = await data.json();
         return response
     }
+    
+    const validateForm=(email, pass,  name, confirmPass)=>{
+        if(name){
+            console.log("name:"+name)
+            const nameRegex=/^[A-Za-z\s]{3,50}$/
+            if(!nameRegex.test(name)) return "Name not valid"
+        }
+        const emailRegex=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+        if(!emailRegex.test(email)) return "Email not valid"
+    
+        const passRegex=/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+        if(!passRegex.test(pass)) return "Password Not Valid"
+    
+        if(confirmPass){
+            if(pass!==confirmPass) return "Password not matching"
+        }
+        return ""
+    
+    }
 
+    const fetchTaskList = async (token)=>{
+            const data = await fetch('http://localhost:8000/tasks/mytasks',{
+                headers: {
+                    'Authorization':'Bearer '+token
+                }
+            })
+            const dataJson = await data.json()
+            console.log(dataJson)
+            dispatch(addTaskList(dataJson))
+        }
+    
     const handleSigninSignup=async()=>{
         if(formType=="signin"){
             const msg = validateForm(email.current.value, pass.current.value);
@@ -76,6 +97,10 @@ const Login=()=>{
                 let response = await getAccessToken(email.current.value,pass.current.value)
                 if(response.access_token){
                     dispatch(setLoginState(true))
+                    dispatch(setToken(response.access_token))
+                    const user=await getUser(response.access_token)
+                    dispatch(setUser(user))
+                    await fetchTaskList(response.access_token)
                     navigate("/dashboard")
                 }
                 else{
@@ -118,7 +143,6 @@ const Login=()=>{
             }
         }
     }
-
     return (
         <div  className="grid bg-black w-full h-screen p-4 place-items-center bg-no-repeat bg-cover" style={{ backgroundImage: "url('https://wallpapers.com/images/hd/futuristic-project-management-inbiirodqxwccs7h.jpg')"}}>
             <form onSubmit={(e)=>e.preventDefault()} className={(formType==="signin"?"h-1/3":"h-1/2")+" w-2/12  bg-gray-100 rounded-2xl"}>

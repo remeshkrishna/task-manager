@@ -3,26 +3,23 @@ import UserActivity from "./UserActivity"
 const RecentActivitiesOverview = ()=>{
     return (
 
-        <div className="w-[80%] h-full m-auto bg-gray-600 rounded-lg shadow-md p-4 text-white hover:scale-105 transition duration-300">
-        {/* Fixed Header */}
-        <h2 className="text-xl font-bold mb-2 sticky top-0 bg-gray-600  p-2 z-10">Recent Activities</h2>
-  
-        {/* Scrollable List */}
-        <div className="h-80 overflow-y-auto space-y-2">
+        <div className="bg-zinc-900 w-[30%] h-full rounded-lg hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out text-white p-4 overflow-hidden flex flex-col">
+          <h2 className="text-xl font-bold sticky top-0 bg-zinc-900 p-2 z-10">Recent Activities</h2>
+          <div className="w-full h-full overflow-y-auto">
             <ul>
                 <li><UserActivity/></li>
-                <li><UserActivity/></li>
-                <li><UserActivity/></li>
-                <li><UserActivity/></li>
-                <li><UserActivity/></li>
-                <li><UserActivity/></li>
-                <li><UserActivity/></li>
-                <li><UserActivity/></li>
-                <li><UserActivity/></li>
-                <li><UserActivity/></li>
+                 <li><UserActivity/></li>
+                 <li><UserActivity/></li>
+                 <li><UserActivity/></li>
+                 <li><UserActivity/></li>
+                 <li><UserActivity/></li>
+                 <li><UserActivity/></li>
+                 <li><UserActivity/></li>
+                 <li><UserActivity/></li>
+                 <li><UserActivity/></li>
             </ul>
+          </div>
         </div>
-</div>
     )
 }
 

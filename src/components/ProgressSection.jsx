@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
+import { useSelector } from "react-redux";
 
 const ProgressBar = ({ label, percentage, gradient }) => {
   const [progress, setProgress] = useState(0);
@@ -21,7 +22,7 @@ const ProgressBar = ({ label, percentage, gradient }) => {
             background: gradient,
           }}
         >
-          {progress}%
+          <span className="ml-2">{progress}%</span>
         </div>
       </div>
     </div>
@@ -29,24 +30,29 @@ const ProgressBar = ({ label, percentage, gradient }) => {
 };
 
 const ProgressSection = () => {
+  const taskList = useSelector((store)=>store.task.taskList) 
+  const pending_tasks = taskList?.filter((item)=>item.status === "Pending")
+  const completed_tasks = taskList?.filter((item)=>item.status === "Completed")
+  const inprogress_tasks = taskList?.filter((item)=>item.status === "In Progress")
+
   return (
-    <div className="w-[80%] mx-auto p-5 bg-gray-600 rounded-lg shadow-lg text-white hover:scale-105 transition duration-300">
+    <div className="w-[30%] h-full p-4 bg-zinc-900 rounded-lg shadow-lg text-white hover:scale-105 transition duration-300 overflow-hidden">
       <h2 className="text-2xl font-bold mb-4">Task Progress Overview</h2>
 
       {/* Progress Bars */}
       <ProgressBar 
         label="Pending Tasks" 
-        percentage={40} 
+        percentage={(pending_tasks?.length/taskList?.length*100)?.toFixed(2)} 
         gradient="linear-gradient(to right, #ff5733, #ff8c00)" 
       />
       <ProgressBar 
         label="In Progress Tasks" 
-        percentage={65} 
+        percentage={(inprogress_tasks?.length/taskList?.length*100)?.toFixed(2)} 
         gradient="linear-gradient(to right, #4b6cb7, #182848)" 
       />
       <ProgressBar 
         label="Completed Tasks" 
-        percentage={90} 
+        percentage={(completed_tasks?.length/taskList?.length*100)?.toFixed(2)} 
         gradient="linear-gradient(to right, #1e9600, #33cc33)" 
       />
     </div>
