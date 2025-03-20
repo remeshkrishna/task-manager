@@ -7,7 +7,6 @@ import AddTask from './components/AddTask'
 import './index.css'
 import Dashboard from './components/Dashboard'
 import TaskList from './components/TaskList'
-import ResponsiveGrid from './components/ResponsiveGrid'
 
 
 function App() {

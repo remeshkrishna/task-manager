@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setLoginState } from "../store/userSlice";
+import { setActiveTaskCard } from "../store/taskSlice";
 
 const SideMenu = () => {
   const [collapsed, setCollapsed] = useState(true);
@@ -46,7 +47,7 @@ const SideMenu = () => {
                 {loginState &&
                     (<Link to="/addtask">
                         <li className="p-2 hover:bg-gray-700 rounded">
-                          <button  className={!collapsed ?"flex place-items-center text-xl gap-2":""}>
+                          <button className={!collapsed ?"flex place-items-center text-xl gap-2":""}>
                             <img src="src/assets/add_task.png" />
                             {!collapsed && <p>Add Task</p>}
                           </button>
@@ -56,7 +57,7 @@ const SideMenu = () => {
                 {loginState &&
                     (<Link to="/task">
                         <li className="p-2 hover:bg-gray-700 rounded">
-                          <button className={!collapsed ?"flex place-items-center text-xl gap-2":""}>
+                          <button  onClick={()=>{dispatch(setActiveTaskCard(null))}} className={!collapsed ?"flex place-items-center text-xl gap-2":""}>
                             <img className={!collapsed ?"w-12 h-12":""} src="src/assets/all_task_icon.png" />
                             {!collapsed && <p>View Tasks</p>}
                           </button>

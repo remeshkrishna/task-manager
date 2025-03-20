@@ -1,6 +1,16 @@
+import { useDispatch } from "react-redux"
+import { setActiveTaskCard } from "../store/taskSlice"
+import { useNavigate } from "react-router-dom"
+
 const OverviewCard=({cardTitle,NumTasks,icon})=>{
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const clickHandle=()=>{
+      dispatch(setActiveTaskCard(cardTitle))
+      navigate('/task')
+    }
     return (
-        <div className="bg-zinc-900 w-[30%] h-full rounded-lg hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out text-white flex flex-col items-center justify-center overflow-hidden">
+        <div onClick={clickHandle} className="bg-zinc-900 w-[30%] h-full rounded-lg hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out text-white flex flex-col items-center justify-center overflow-hidden">
           <img className="mt-4 w-12" src={icon} alt="Pending Tasks"/>
           <p className="text-xl font-bold w-[80%] text-center">{cardTitle}</p>
           <p className="font-bold text-xl">{NumTasks}</p>
