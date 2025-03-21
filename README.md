@@ -36,6 +36,7 @@
 ### All Tasks Page
 - View, edit, delete tasks  
 ![alt text](image-4.png)
+![alt text](image-6.png)
 
 ### Task Details Page
 - Full details with comments & activity log  
