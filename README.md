@@ -9,7 +9,9 @@
 ## Authentication
 ### Login & Signup Pages
 - JWT-based authentication
+![alt text](image.png)
 
+![alt text](image-1.png)
 ---
 
 ## Dashboard
@@ -18,16 +20,22 @@
 - **Task Progress:** Category-wise progress bars  
 - **Quick Actions:** Add Task, View All Tasks buttons  
 - **Task List (Compact View):** Search, filter, sort tasks  
-- **Calendar View (Optional):** Upcoming task deadlines  
+- **Calendar View :** Upcoming task deadlines  
+
+![alt text](image-2.png)
+![alt text](image-5.png)
+
 
 ---
 
 ## Task Management
 ### Add Task Page
 - Form for task creation  
+![alt text](image-3.png)
 
 ### All Tasks Page
 - View, edit, delete tasks  
+![alt text](image-4.png)
 
 ### Task Details Page
 - Full details with comments & activity log  
