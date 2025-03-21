@@ -5,6 +5,7 @@ import { addTaskList } from "../store/taskSlice"
 const TaskCard=({task_id,task_name,task_des, task_dueDate, task_priority, task_status, task_assignTo})=>{
     const dispatch = useDispatch()
     const token = useSelector((store)=>store.user.token)
+    const user = useSelector((store)=>store.user.user)
     const [name, desc, dueDate, priority, status, assignTo] = [useRef(task_name),useRef(task_des),useRef(task_dueDate),useRef(task_priority),useRef(task_status),useRef(task_assignTo)]
     const [isEditable, setIsEditable] = useState(false) 
     const handleEdit=()=>{
@@ -24,6 +25,18 @@ const TaskCard=({task_id,task_name,task_des, task_dueDate, task_priority, task_s
             status.current.value=task_status
         } 
     }
+
+    const fetchTaskList = async (token)=>{
+        const data = await fetch('http://localhost:8000/tasks/mytasks',{
+            headers: {
+                'Authorization':'Bearer '+token
+            }
+        })
+        const dataJson = await data.json()
+        console.log(dataJson)
+        dispatch(addTaskList(dataJson))
+    }
+
     const deleteTask=async ()=>{
             const data = await fetch('http://localhost:8000/deletetask/'+task_id,{
                 method: 'DELETE',
@@ -36,16 +49,30 @@ const TaskCard=({task_id,task_name,task_des, task_dueDate, task_priority, task_s
             }
     }
 
-    const fetchTaskList = async (token)=>{
-                const data = await fetch('http://localhost:8000/tasks/mytasks',{
-                    headers: {
-                        'Authorization':'Bearer '+token
-                    }
-                })
-                const dataJson = await data.json()
-                console.log(dataJson)
-                dispatch(addTaskList(dataJson))
+    const updateTask=async()=>{
+        const data = await fetch('http://localhost:8000/tasks/'+task_id,{
+            method: 'PUT',
+            body: JSON.stringify({
+                "name": name.current.value,
+                "description": desc.current.value,
+                "due_date": dueDate.current.value,
+                "priority": priority.current.value,
+                "status": status.current.value,
+                "assigned_to": assignTo.current.value,
+                "user_id":user.id
+              }),
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Bearer '+token
             }
+        })
+        if(data.ok){
+            fetchTaskList(token)
+            setIsEditable(!isEditable)
+        }
+    }
+
+    
 
     return(
         
@@ -100,7 +127,7 @@ const TaskCard=({task_id,task_name,task_des, task_dueDate, task_priority, task_s
                             <button onClick={deleteTask} className="ml-2">
                                 <img className="w-4 h-4 hover:h-8 hover:w-8" src='/src/assets/delete_task.png'/>
                             </button>
-                            {isEditable &&<button className="ml-4 h-fit text-sm bg-orange-500 rounded-lg text-center p-2 hover:bg-orange-800">
+                            {isEditable &&<button onClick={updateTask} className="ml-4 h-fit text-sm bg-orange-500 rounded-lg text-center p-2 hover:bg-orange-800">
                                 update
                             </button>}
                         </div>
